@@ -60,9 +60,9 @@ export default function Sidebar({ isOpen, onClose }) {
                     <div className="sidebar-footer-label">socials</div>
                     <div className="sidebar-footer-line" />
                     <div className="sidebar-socials">
-                        <a href="#" className="social-link">Instagram</a>
-                        <a href="#" className="social-link">LinkedIn</a>
-                        <a href="#" className="social-link">GitHub</a>
+                        <a href="https://instagram.com/nazca_nokaze" target="_blank" rel="noopener noreferrer" className="social-link">instagram</a>
+                        <a href="https://www.linkedin.com/in/nazca-nokaze-a809873a2/" target="_blank" rel="noopener noreferrer" className="social-link">linkedin</a>
+                        <a href="https://github.com/nazca13" target="_blank" rel="noopener noreferrer" className="social-link">github</a>
                     </div>
                     <div className="sidebar-copy">© 2026 nazca systems</div>
                 </div>

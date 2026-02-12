@@ -83,9 +83,9 @@ export default function Footer() {
           <div className="info-block">
             <h3>socials</h3>
             <ul>
-              <li><a href="#">Instagram</a></li>
-              <li><a href="#">LinkedIn</a></li>
-              <li><a href="#">GitHub</a></li>
+              <li><a href="https://instagram.com/nazca_nokaze" target="_blank" rel="noopener noreferrer">instagram</a></li>
+              <li><a href="https://www.linkedin.com/in/nazca-nokaze-a809873a2/" target="_blank" rel="noopener noreferrer">linkedin</a></li>
+              <li><a href="https://github.com/nazca13" target="_blank" rel="noopener noreferrer">github</a></li>
             </ul>
           </div>
         </div>
