@@ -85,13 +85,13 @@ export default function Sidebar({ isOpen, onClose }) {
                 .sidebar {
                     position: fixed;
                     top: 0; right: 0;
-                    width: 420px; height: 100vh;
+                    width: 360px; height: 100vh;
                     background: linear-gradient(180deg, #0d0d0d 0%, #080808 100%);
                     border-left: 1px solid rgba(255,255,255,0.08);
                     z-index: 100;
                     display: flex; flex-direction: column;
                     justify-content: space-between;
-                    padding: 40px 50px 50px;
+                    padding: 30px 40px 40px;
                     transform: translateX(100%);
                     transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
                     box-shadow: -20px 0 60px rgba(0,0,0,0.5);
@@ -101,7 +101,7 @@ export default function Sidebar({ isOpen, onClose }) {
                 /* Close Button */
                 .sidebar-close {
                     position: relative;
-                    width: 48px; height: 48px;
+                    width: 40px; height: 40px;
                     background: none;
                     border: 1px solid rgba(255,255,255,0.15);
                     border-radius: 50%;
@@ -120,7 +120,7 @@ export default function Sidebar({ isOpen, onClose }) {
                 }
                 .close-line {
                     position: absolute;
-                    width: 18px; height: 1.5px;
+                    width: 14px; height: 1.5px;
                     background: var(--fg);
                     transform: rotate(45deg);
                     transition: background 0.3s;
@@ -134,11 +134,11 @@ export default function Sidebar({ isOpen, onClose }) {
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
-                    gap: 30px;
+                    gap: 22px;
                 }
                 .sidebar-label {
                     font-family: var(--font-mono);
-                    font-size: 0.7rem;
+                    font-size: 0.6rem;
                     color: rgba(255,255,255,0.3);
                     letter-spacing: 3px;
                     font-weight: 500;
@@ -153,13 +153,13 @@ export default function Sidebar({ isOpen, onClose }) {
                 .sidebar-link {
                     color: var(--fg) !important;
                     text-decoration: none !important;
-                    font-size: 2.5rem;
+                    font-size: 2rem;
                     font-weight: 700;
-                    padding: 15px 20px;
+                    padding: 12px 16px;
                     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
                     display: flex;
                     align-items: center;
-                    gap: 20px;
+                    gap: 16px;
                     letter-spacing: -0.02em;
                     line-height: 1;
                     border-radius: 8px;
@@ -169,14 +169,14 @@ export default function Sidebar({ isOpen, onClose }) {
                 }
                 .sidebar-link .link-num {
                     font-family: var(--font-mono);
-                    font-size: 0.75rem;
+                    font-size: 0.65rem;
                     opacity: 0.3;
-                    min-width: 24px;
+                    min-width: 20px;
                     transition: all 0.3s;
                 }
                 .sidebar-link .link-text { flex: 1; }
                 .sidebar-link .link-arrow {
-                    font-size: 1.2rem;
+                    font-size: 1rem;
                     opacity: 0;
                     transform: translateX(-10px);
                     transition: all 0.3s;
@@ -205,7 +205,7 @@ export default function Sidebar({ isOpen, onClose }) {
                 }
                 .sidebar-footer-label {
                     font-family: var(--font-mono);
-                    font-size: 0.7rem;
+                    font-size: 0.6rem;
                     color: rgba(255,255,255,0.3);
                     letter-spacing: 3px;
                     font-weight: 500;
@@ -216,11 +216,11 @@ export default function Sidebar({ isOpen, onClose }) {
                 }
                 .sidebar-socials {
                     display: flex;
-                    gap: 25px;
+                    gap: 20px;
                 }
                 .social-link {
                     font-family: var(--font-mono) !important;
-                    font-size: 0.8rem !important;
+                    font-size: 0.7rem !important;
                     color: var(--fg) !important;
                     text-decoration: none !important;
                     opacity: 0.5;
@@ -230,11 +230,11 @@ export default function Sidebar({ isOpen, onClose }) {
                 .social-link:hover { opacity: 1; color: var(--primary) !important; }
                 .sidebar-copy {
                     font-family: var(--font-mono);
-                    font-size: 0.7rem;
+                    font-size: 0.6rem;
                     opacity: 0.2;
                     color: var(--fg);
                     letter-spacing: 1px;
-                    margin-top: 5px;
+                    margin-top: 4px;
                 }
 
                 @media (max-width: 768px) {

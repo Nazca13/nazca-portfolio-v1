@@ -99,8 +99,8 @@ export default function Footer() {
       <style jsx global>{`
         /* === FOOTER MAIN SECTION === */
         .footer-section {
-          padding-top: 100px;
-          padding-bottom: 50px;
+          padding-top: 70px;
+          padding-bottom: 35px;
           border-top: 1px solid var(--border-subtle);
           background: linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
         }
@@ -109,28 +109,28 @@ export default function Footer() {
         .footer-content {
           display: grid;
           grid-template-columns: 1.5fr 1fr;
-          gap: 80px;
+          gap: 60px;
           align-items: start;
         }
         
         /* === LEFT SECTION (FORM) === */
         .footer-title {
-          font-size: clamp(3rem, 6vw, 6rem);
+          font-size: clamp(2.2rem, 5vw, 4.5rem);
           font-weight: 800;
           line-height: 0.9;
-          margin-bottom: 50px;
+          margin-bottom: 35px;
           text-transform: none;
           letter-spacing: -0.02em;
         }
         
         .cyber-form {
-          max-width: 600px;
+          max-width: 500px;
         }
         
         .form-group {
-          margin-bottom: 40px;
+          margin-bottom: 28px;
           border-bottom: 1px solid var(--border-medium);
-          padding-bottom: 10px;
+          padding-bottom: 8px;
           transition: border-color var(--transition-base);
         }
 
@@ -141,8 +141,8 @@ export default function Footer() {
         label {
           display: block;
           font-family: var(--font-mono);
-          font-size: 0.75rem;
-          margin-bottom: 15px;
+          font-size: 0.65rem;
+          margin-bottom: 10px;
           opacity: 0.6;
           text-transform: none;
           letter-spacing: 0.5px;
@@ -160,7 +160,7 @@ export default function Footer() {
           background: transparent;
           border: none;
           color: var(--fg);
-          font-size: 1.2rem;
+          font-size: 0.95rem;
           outline: none;
           font-family: var(--font-main);
           resize: none;
@@ -184,23 +184,23 @@ export default function Footer() {
         }
 
         .form-submit {
-          margin-top: 50px;
+          margin-top: 35px;
         }
         
         /* === RIGHT SECTION (INFO) === */
         .footer-info {
           font-family: var(--font-mono);
-          padding-top: 20px;
+          padding-top: 15px;
         }
         
         .info-block {
-          margin-bottom: 50px;
+          margin-bottom: 35px;
         }
         
         .info-block h3 {
           opacity: 0.5;
-          margin-bottom: 20px;
-          font-size: 0.75rem;
+          margin-bottom: 15px;
+          font-size: 0.65rem;
           letter-spacing: 1.5px;
           text-transform: none;
           font-weight: 600;
@@ -209,8 +209,8 @@ export default function Footer() {
         .info-block p,
         .info-block li a,
         .contact-link {
-          font-size: 1.1rem;
-          margin-bottom: 8px;
+          font-size: 0.9rem;
+          margin-bottom: 6px;
           display: block;
           color: var(--fg) !important;
           text-decoration: none !important;
@@ -246,13 +246,13 @@ export default function Footer() {
         
         /* === FOOTER BOTTOM === */
         .footer-bottom {
-          margin-top: 100px;
-          padding-top: 30px;
+          margin-top: 70px;
+          padding-top: 22px;
           border-top: 1px solid var(--border-light);
           display: flex;
           justify-content: space-between;
           font-family: var(--font-mono);
-          font-size: 0.75rem;
+          font-size: 0.65rem;
           opacity: 0.5;
           text-transform: none;
           letter-spacing: 0.5px;

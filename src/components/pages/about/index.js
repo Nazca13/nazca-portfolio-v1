@@ -180,7 +180,7 @@ export default function AboutPage() {
                 /* --- NAV --- */
                 .navbar {
                     position: fixed; top: 0; left: 0; width: 100%;
-                    z-index: 40; padding: 25px 0;
+                    z-index: 40; padding: 18px 0;
                     background: rgba(5,5,5,0.7);
                     backdrop-filter: blur(12px);
                     -webkit-backdrop-filter: blur(12px);
@@ -190,10 +190,10 @@ export default function AboutPage() {
                 .navbar.nav-hidden {
                     transform: translateY(-100%);
                 }
-                .nav-container { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.8rem; text-transform: none; }
+                .nav-container { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.7rem; text-transform: none; }
                 .nav-logo {
                     font-weight: bold;
-                    font-size: 1rem;
+                    font-size: 0.85rem;
                     letter-spacing: 2px;
                     text-decoration: none !important;
                     color: var(--fg) !important;
@@ -202,37 +202,37 @@ export default function AboutPage() {
                 .text-primary { color: var(--primary) !important; }
                 .nav-right { display: flex; align-items: center; gap: 25px; }
                 .nav-info { opacity: 0.5; }
-                .hamburger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
-                .bar { width: 28px; height: 2px; background: var(--fg); transition: all 0.3s; }
+                .hamburger { display: flex; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 5px; }
+                .bar { width: 22px; height: 1.5px; background: var(--fg); transition: all 0.3s; }
                 .hamburger:hover .bar { background: var(--primary); }
                 .hamburger:hover .bar:nth-child(2) { width: 20px; }
 
                 /* Progress Bar */
-                .cyber-progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; background: var(--primary); z-index: 100; transform-origin: left; transform: scaleX(0); box-shadow: 0 0 10px var(--primary); }
+                .cyber-progress { position: fixed; top: 0; left: 0; height: 2px; width: 100%; background: var(--primary); z-index: 100; transform-origin: left; transform: scaleX(0); box-shadow: 0 0 8px var(--primary); }
 
                 /* --- HERO --- */
-                .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 100px; padding-bottom: 50px; }
+                .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; padding-bottom: 40px; }
                 .hero-content { width: 100%; }
-                .hero-top { font-family: var(--font-mono); font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-                .status-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 5px var(--primary); animation: pulse 2s infinite; }
-                .hero-title { font-size: clamp(3.5rem, 9vw, 9rem); font-weight: 700; line-height: 0.85; letter-spacing: -0.04em; text-transform: none; margin-bottom: 40px; }
-                .hero-desc { max-width: 600px; font-size: 1.1rem; opacity: 0.7; line-height: 1.7; font-family: var(--font-mono); }
+                .hero-top { font-family: var(--font-mono); font-size: 0.75rem; opacity: 0.7; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+                .status-dot { width: 6px; height: 6px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 5px var(--primary); animation: pulse 2s infinite; }
+                .hero-title { font-size: clamp(2.8rem, 7vw, 6.5rem); font-weight: 700; line-height: 0.85; letter-spacing: -0.04em; text-transform: none; margin-bottom: 30px; }
+                .hero-desc { max-width: 480px; font-size: 0.95rem; opacity: 0.7; line-height: 1.7; font-family: var(--font-mono); }
 
                 /* --- SECTIONS --- */
-                .section { padding-top: 80px; padding-bottom: 80px; border-top: 1px solid var(--border-medium); }
-                .section-header { display: flex; align-items: center; gap: 30px; margin-bottom: 50px; }
-                .section-label { font-family: var(--font-mono); font-size: 0.9rem; letter-spacing: 2px; opacity: 0.5; white-space: nowrap; }
+                .section { padding-top: 60px; padding-bottom: 60px; border-top: 1px solid var(--border-medium); }
+                .section-header { display: flex; align-items: center; gap: 22px; margin-bottom: 35px; }
+                .section-label { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 2px; opacity: 0.5; white-space: nowrap; }
                 .section-line { flex: 1; height: 1px; background: var(--border-medium); }
-                .section-body { font-size: 1.1rem; line-height: 1.8; opacity: 0.8; max-width: 750px; }
-                .section-body p { margin-bottom: 25px; }
+                .section-body { font-size: 0.9rem; line-height: 1.8; opacity: 0.8; max-width: 600px; }
+                .section-body p { margin-bottom: 18px; }
 
                 /* --- EXPERTISE --- */
                 .expertise-list { border-top: 1px solid var(--border-medium); }
-                .skill-row { display: flex; align-items: center; padding: 35px 0; border-bottom: 1px solid var(--border-medium); gap: 30px; transition: all 0.3s; cursor: default; }
-                .skill-row:hover { background: var(--bg-alt); padding-left: 25px; padding-right: 25px; }
-                .skill-id { font-family: var(--font-mono); opacity: 0.4; font-size: 0.9rem; flex-shrink: 0; }
-                .skill-name { font-size: clamp(1.3rem, 3vw, 2rem); font-weight: 600; text-transform: none; margin: 0 0 6px 0; line-height: 1; letter-spacing: -0.02em; }
-                .skill-stack { font-family: var(--font-mono); font-size: 0.85rem; opacity: 0.5; margin: 0; }
+                .skill-row { display: flex; align-items: center; padding: 25px 0; border-bottom: 1px solid var(--border-medium); gap: 22px; transition: all 0.3s; cursor: default; }
+                .skill-row:hover { background: var(--bg-alt); padding-left: 20px; padding-right: 20px; }
+                .skill-id { font-family: var(--font-mono); opacity: 0.4; font-size: 0.75rem; flex-shrink: 0; }
+                .skill-name { font-size: clamp(1rem, 2.5vw, 1.5rem); font-weight: 600; text-transform: none; margin: 0 0 5px 0; line-height: 1; letter-spacing: -0.02em; }
+                .skill-stack { font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.5; margin: 0; }
 
                 @keyframes pulse {
                     0% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 0, 60, 0.7); }

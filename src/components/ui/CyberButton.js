@@ -10,10 +10,10 @@ export default function CyberButton({ children, onClick, disabled = false, type 
           position: relative;
           background: var(--fg);
           color: #000;
-          padding: 15px 35px;
+          padding: 11px 26px;
           font-family: var(--font-mono);
           font-weight: bold;
-          font-size: 0.9rem;
+          font-size: 0.75rem;
           border: none;
           cursor: none;
           transition: all var(--transition-base);

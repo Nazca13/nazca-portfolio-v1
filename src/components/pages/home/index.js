@@ -18,7 +18,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const FEATURED_PROJECTS = [
     { id: "01", name: "FlashPark", cat: "web application", stack: "Next.js / PostgreSQL", color: "#ff003c", image: "/images/works/web/flashpark/page1.png" },
-    { id: "02", name: "Porsche Landing Page", cat: "web design", stack: "Figma", color: "#ff003c", image: "/images/works/design/work1/page1.png" },
+    { id: "02", name: "Porsche Landing Page", cat: "web design", stack: "Figma", color: "#ff003c", image: "/images/works/design/porsche-landing-page/page1.png" },
     { id: "03", name: "Aquanime", cat: "web application", stack: "Next.js / Tailwind CSS", color: "#ff003c", image: "/images/works/web/aquanime/page1.png" },
 ];
 
@@ -27,9 +27,26 @@ export default function HomePage() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [navHidden, setNavHidden] = useState(false);
     const lastScrollY = useRef(0);
+    const [currentRole, setCurrentRole] = useState(0);
+
+    const roles = [
+        'web developer',
+        'ai explorer',
+        'tech enthusiast',
+        'creative coder',
+        'digital craftsman'
+    ];
 
     const marqueeTween = useRef(null);
     const projectsRef = useRef(null);
+
+    // Rotate roles every 3 seconds
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentRole((prev) => (prev + 1) % roles.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, []);
 
     useEffect(() => {
         const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
@@ -148,7 +165,9 @@ export default function HomePage() {
 
                         <h1 className="hero-title">
                             <div className="mask">
-                                <span className="hero-anim block glitch-text" data-text="web developer">web developer</span>
+                                <span className="hero-anim block rotating-text" key={currentRole}>
+                                    {roles[currentRole]}
+                                </span>
                             </div>
                             <div className="mask">
                                 <span className="hero-anim block hero-sub">enthusiast</span>
@@ -249,6 +268,23 @@ export default function HomePage() {
         .content-wrapper { position: relative; z-index: 10; }
         .mask { overflow: hidden; }
         .block { display: block; }
+        
+        /* Rotating Text Animation */
+        .rotating-text {
+            animation: slideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes slideIn {
+            0% {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
         .text-primary { color: var(--primary); }
         .text-highlight { color: var(--fg); font-weight: bold; border-bottom: 1px solid var(--primary); }
         .hidden-mobile { display: block; }
@@ -256,7 +292,7 @@ export default function HomePage() {
         /* --- STICKY NAV --- */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%;
-            z-index: 40; padding: 25px 0;
+            z-index: 40; padding: 18px 0;
             background: rgba(5,5,5,0.7);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -266,52 +302,52 @@ export default function HomePage() {
         .navbar.nav-hidden {
             transform: translateY(-100%);
         }
-        .nav-container { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.8rem; text-transform: none; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.7rem; text-transform: none; }
         .nav-logo {
-            font-weight: bold; font-size: 1rem; letter-spacing: 2px;
+            font-weight: bold; font-size: 0.85rem; letter-spacing: 2px;
             text-decoration: none !important; color: var(--fg) !important;
             font-family: var(--font-mono);
         }
-        .nav-right { display: flex; align-items: center; gap: 30px; }
+        .nav-right { display: flex; align-items: center; gap: 25px; }
 
-        .hamburger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
-        .bar { width: 28px; height: 2px; background: var(--fg); transition: all 0.3s; }
+        .hamburger { display: flex; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 5px; }
+        .bar { width: 22px; height: 1.5px; background: var(--fg); transition: all 0.3s; }
         .hamburger:hover .bar { background: var(--primary); }
         .hamburger:hover .bar:nth-child(2) { width: 20px; }
 
         /* Progress Bar */
-        .cyber-progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; background: var(--primary); z-index: 100; transform-origin: left; transform: scaleX(0); box-shadow: 0 0 10px var(--primary); }
+        .cyber-progress { position: fixed; top: 0; left: 0; height: 2px; width: 100%; background: var(--primary); z-index: 100; transform-origin: left; transform: scaleX(0); box-shadow: 0 0 8px var(--primary); }
 
         /* --- HERO --- */
-        .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 100px; padding-bottom: 50px; }
+        .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; padding-bottom: 40px; }
         .hero-content { width: 100%; }
-        .hero-top { font-family: var(--font-mono); font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-        .status-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 5px var(--primary); animation: pulse 2s infinite; }
+        .hero-top { font-family: var(--font-mono); font-size: 0.75rem; opacity: 0.7; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .status-dot { width: 6px; height: 6px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 5px var(--primary); animation: pulse 2s infinite; }
 
-        .hero-title { font-size: clamp(3.5rem, 9vw, 9rem); font-weight: 700; line-height: 0.85; letter-spacing: -0.04em; text-transform: none; margin-bottom: 40px; }
+        .hero-title { font-size: clamp(2.8rem, 7vw, 6.5rem); font-weight: 700; line-height: 0.85; letter-spacing: -0.04em; text-transform: none; margin-bottom: 30px; }
         .hero-sub {
-            font-size: clamp(3.5rem, 9vw, 9rem);
+            font-size: clamp(2.8rem, 7vw, 6.5rem);
             font-weight: 700;
             letter-spacing: -0.03em;
             -webkit-text-fill-color: transparent;
-            -webkit-text-stroke: 2px var(--fg);
+            -webkit-text-stroke: 1.5px var(--fg);
         }
 
-        .hero-desc { max-width: 600px; font-size: 1.2rem; opacity: 0.7; line-height: 1.6; font-family: var(--font-mono); margin-bottom: 50px; }
+        .hero-desc { max-width: 480px; font-size: 0.95rem; opacity: 0.7; line-height: 1.6; font-family: var(--font-mono); margin-bottom: 35px; }
 
-        .hero-cta { display: flex; align-items: center; gap: 40px; }
+        .hero-cta { display: flex; align-items: center; gap: 30px; }
         .link-about {
             font-family: var(--font-mono) !important;
             text-transform: none;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--fg) !important;
             text-decoration: none !important;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             transition: all 0.3s;
             border-bottom: 1px solid var(--border-medium);
-            padding-bottom: 5px;
+            padding-bottom: 4px;
             letter-spacing: 1px;
         }
         .link-about .link-arrow-cta { transition: transform 0.3s; }
@@ -320,46 +356,46 @@ export default function HomePage() {
 
         /* --- MARQUEE --- */
         .marquee-section { border-top: 1px solid var(--border-medium); border-bottom: 1px solid var(--border-medium); background: var(--bg); }
-        .marquee-label { font-family: var(--font-mono); font-size: 0.85rem; text-transform: none; letter-spacing: 2px; opacity: 0.4; padding-top: 30px; padding-bottom: 15px; }
-        .marquee-wrapper { padding-bottom: 50px; overflow: hidden; white-space: nowrap; }
-        .marquee-track { display: flex; gap: 60px; width: max-content; }
-        .marquee-item { display: flex; align-items: center; gap: 60px; font-size: 3rem; font-weight: bold; font-family: var(--font-main); text-transform: none; opacity: 0.8; letter-spacing: -1px; }
+        .marquee-label { font-family: var(--font-mono); font-size: 0.7rem; text-transform: none; letter-spacing: 2px; opacity: 0.4; padding-top: 22px; padding-bottom: 10px; }
+        .marquee-wrapper { padding-bottom: 35px; overflow: hidden; white-space: nowrap; }
+        .marquee-track { display: flex; gap: 45px; width: max-content; }
+        .marquee-item { display: flex; align-items: center; gap: 45px; font-size: 2.2rem; font-weight: bold; font-family: var(--font-main); text-transform: none; opacity: 0.8; letter-spacing: -1px; }
         .sep { color: var(--primary); }
 
         /* --- SERVICES --- */
         .services-section {
-            padding-top: 100px;
-            padding-bottom: 100px;
+            padding-top: 70px;
+            padding-bottom: 70px;
             border-bottom: 1px solid var(--border-medium);
         }
         .services-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
             font-weight: 700;
             text-transform: capitalize;
-            margin-bottom: 50px;
+            margin-bottom: 35px;
             line-height: 1;
             letter-spacing: -0.03em;
         }
         .services-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            gap: 35px;
         }
         .service-card { padding: 0; }
         .service-top {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
+            gap: 12px;
+            margin-bottom: 18px;
         }
         .service-num {
-            width: 32px; height: 32px;
+            width: 26px; height: 26px;
             background: var(--primary);
             color: #fff;
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             font-weight: 800;
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             flex-shrink: 0;
         }
         .service-line {
@@ -368,13 +404,13 @@ export default function HomePage() {
             background: var(--border-medium);
         }
         .service-name {
-            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
             font-weight: 600;
-            margin: 0 0 15px 0;
+            margin: 0 0 10px 0;
             line-height: 1.1;
         }
         .service-desc {
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             opacity: 0.6;
             line-height: 1.7;
             font-family: var(--font-mono);
@@ -382,26 +418,27 @@ export default function HomePage() {
         }
 
         /* --- FEATURED WORKS --- */
-        .projects { padding-top: 100px; padding-bottom: 100px; position: relative; }
+        .projects { padding-top: 70px; padding-bottom: 70px; position: relative; }
         .projects-header {
             display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 60px; flex-wrap: wrap; gap: 25px;
+            margin-bottom: 40px; flex-wrap: wrap; gap: 20px;
         }
-        .section-title { font-family: var(--font-mono); font-size: 0.9rem; opacity: 0.6; letter-spacing: 1px; }
+        .section-title { font-family: var(--font-mono); font-size: 0.75rem; opacity: 0.6; letter-spacing: 1px; }
         .highlight { color: var(--primary); font-weight: bold; }
 
         /* Project List */
-        .project-list { border-top: 1px solid var(--border-medium); min-height: 300px; }
-        .project-item { display: flex; justify-content: space-between; align-items: center; padding: 50px 0; border-bottom: 1px solid var(--border-medium); transition: all 0.3s; cursor: pointer; }
-        .project-item:hover { background: var(--bg-alt); padding-left: 30px; padding-right: 30px; }
+        .project-list { border-top: 1px solid var(--border-medium); min-height: 200px; }
+        .project-item { display: flex; justify-content: space-between; align-items: center; padding: 35px 0; border-bottom: 1px solid var(--border-medium); transition: all 0.3s; cursor: pointer; }
+        .project-item:hover { background: var(--bg-alt); padding-left: 25px; padding-right: 25px; }
 
-        .proj-left { display: flex; align-items: baseline; gap: 30px; }
-        .proj-id { font-family: var(--font-mono); opacity: 0.5; font-size: 0.9rem; }
-        .proj-name { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 600; text-transform: none; margin: 0; line-height: 1; letter-spacing: -0.02em; }
+        .proj-left { display: flex; align-items: baseline; gap: 22px; }
+        .proj-id { font-family: var(--font-mono); opacity: 0.5; font-size: 0.75rem; }
+        .proj-name { font-size: clamp(1.5rem, 3.5vw, 2.5rem); font-weight: 600; text-transform: none; margin: 0; line-height: 1; letter-spacing: -0.02em; transition: color 0.3s; }
+        .project-item:hover .proj-name { color: #fff; }
 
-        .proj-right { text-align: right; font-family: var(--font-mono); font-size: 0.9rem; opacity: 0.7; }
-        .proj-cat { display: block; color: var(--primary); margin-bottom: 6px; }
-        .proj-stack { font-size: 0.85rem; opacity: 0.5; }
+        .proj-right { text-align: right; font-family: var(--font-mono); font-size: 0.75rem; opacity: 0.7; }
+        .proj-cat { display: block; color: var(--primary); margin-bottom: 5px; }
+        .proj-stack { font-size: 0.7rem; opacity: 0.5; }
 
         @keyframes pulse {
           0% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 0, 60, 0.7); }

@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -18,17 +18,30 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function WorkPage() {
     const [loading, setLoading] = useState(true);
-    const [activeTab, setActiveTab] = useState('all');
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [navHidden, setNavHidden] = useState(false);
+    const [activeTab, setActiveTab] = useState('all');
+    const [activeCategory, setActiveCategory] = useState('all');
     const [selectedProject, setSelectedProject] = useState(null);
     const lastScrollY = useRef(0);
     const modalRef = useRef(null);
     const modalCardRef = useRef(null);
 
-    const filteredProjects = activeTab === 'all'
-        ? ALL_PROJECTS
-        : ALL_PROJECTS.filter(p => p.type === activeTab);
+    const filteredProjects = useMemo(() => {
+        return ALL_PROJECTS.filter(project => {
+            // 1. Filter by Type
+            const typeMatch = activeTab === 'all'
+                ? true
+                : project.type === (activeTab === 'work' ? 'freelance' : activeTab);
+
+            // 2. Filter by Category (only if type match & activeTab is not all)
+            if (!typeMatch) return false;
+            if (activeTab !== 'all' && activeCategory !== 'all') {
+                return project.cat === activeCategory;
+            }
+            return true;
+        });
+    }, [activeTab, activeCategory]);
 
     useEffect(() => {
         const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
@@ -148,20 +161,37 @@ export default function WorkPage() {
                     </p>
                 </section>
 
-                {/* --- FILTER TABS --- */}
+                {/* --- FILTER TABS (Main) --- */}
                 <div className="filter-section container">
                     <div className="tabs work-anim">
-                        {['all', 'personal', 'freelance'].map((tab) => (
+                        {['all', 'personal', 'work'].map((tab) => (
                             <button
                                 key={tab}
-                                onClick={() => setActiveTab(tab)}
+                                onClick={() => { setActiveTab(tab); setActiveCategory('all'); }}
                                 className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
                             >
-                                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                                {tab}
                             </button>
                         ))}
                     </div>
                 </div>
+
+                {/* --- SECONDARY CATEGORY FILTER (For Personal & Work) --- */}
+                {activeTab !== 'all' && (
+                    <div className="category-filter container">
+                        <div className="filter-pills work-anim">
+                            {['all', 'web application', 'mobile application', 'web design', 'app design', 'web 3'].map((cat) => (
+                                <button
+                                    key={cat}
+                                    onClick={() => setActiveCategory(cat)}
+                                    className={`filter-pill ${activeCategory === cat ? 'active' : ''}`}
+                                >
+                                    {cat}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                )}
 
                 {/* --- PROJECTS LIST --- */}
                 <section className="projects-section container">
@@ -247,7 +277,7 @@ export default function WorkPage() {
                 /* --- STICKY NAV --- */
                 .navbar {
                     position: fixed; top: 0; left: 0; width: 100%;
-                    z-index: 40; padding: 25px 0;
+                    z-index: 40; padding: 18px 0;
                     background: rgba(5,5,5,0.7);
                     backdrop-filter: blur(12px);
                     -webkit-backdrop-filter: blur(12px);
@@ -255,68 +285,103 @@ export default function WorkPage() {
                     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 }
                 .navbar.nav-hidden { transform: translateY(-100%); }
-                .nav-container { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.8rem; text-transform: none; }
-                .nav-logo { font-weight: bold; font-size: 1rem; letter-spacing: 2px; text-decoration: none !important; color: var(--fg) !important; font-family: var(--font-mono); }
+                .nav-container { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.7rem; text-transform: none; }
+                .nav-logo { font-weight: bold; font-size: 0.85rem; letter-spacing: 2px; text-decoration: none !important; color: var(--fg) !important; font-family: var(--font-mono); }
                 .nav-right { display: flex; align-items: center; gap: 25px; }
-                .nav-page-label { opacity: 0.4; letter-spacing: 2px; font-size: 0.75rem; }
+                .nav-page-label { opacity: 0.4; letter-spacing: 2px; font-size: 0.65rem; }
 
-                .hamburger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
-                .bar { width: 28px; height: 2px; background: var(--fg); transition: all 0.3s; }
+                .hamburger { display: flex; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 5px; }
+                .bar { width: 22px; height: 1.5px; background: var(--fg); transition: all 0.3s; }
                 .hamburger:hover .bar { background: var(--primary); }
                 .hamburger:hover .bar:nth-child(2) { width: 20px; }
 
                 /* Progress Bar */
-                .cyber-progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; background: var(--primary); z-index: 100; transform-origin: left; transform: scaleX(0); box-shadow: 0 0 10px var(--primary); }
+                .cyber-progress { position: fixed; top: 0; left: 0; height: 2px; width: 100%; background: var(--primary); z-index: 100; transform-origin: left; transform: scaleX(0); box-shadow: 0 0 8px var(--primary); }
 
                 /* --- HERO --- */
-                .work-hero { padding-top: 160px; padding-bottom: 60px; text-align: center; }
-                .work-title { font-size: clamp(3rem, 7vw, 6rem); font-weight: 700; line-height: 1; letter-spacing: -0.04em; margin-bottom: 25px; }
-                .work-desc { font-family: var(--font-mono); font-size: 1rem; opacity: 0.5; max-width: 550px; margin: 0 auto; line-height: 1.6; }
+                .work-hero { padding-top: 120px; padding-bottom: 45px; text-align: center; }
+                .work-title { font-size: clamp(2.2rem, 5.5vw, 4.5rem); font-weight: 700; line-height: 1; letter-spacing: -0.04em; margin-bottom: 18px; }
+                .work-desc { font-family: var(--font-mono); font-size: 0.8rem; opacity: 0.5; max-width: 450px; margin: 0 auto; line-height: 1.6; }
 
-                /* --- FILTER --- */
-                .filter-section { padding-bottom: 0; margin-bottom: 20px; }
-                .tabs { display: flex; gap: 0; width: 100%; }
+                /* --- FILTER TABS --- */
+                .filter-section { padding-bottom: 0; margin-bottom: 15px; }
+                .tabs { display: flex; gap: 0; width: 100%; border-bottom: 1px solid var(--border-medium); }
                 .tab-btn {
-                    flex: 1; padding: 16px 20px;
-                    border: 1px solid var(--border-medium);
+                    flex: 1; padding: 12px 16px;
+                    border: 1px solid transparent;
+                    border-bottom: none;
                     background: transparent;
                     color: var(--fg-muted);
                     font-family: var(--font-main);
-                    font-size: 0.95rem; font-weight: 500;
+                    font-size: 0.8rem; font-weight: 500;
                     cursor: pointer; transition: all 0.3s;
                     text-align: center;
+                    position: relative;
                 }
-                .tab-btn:first-child { border-radius: 4px 0 0 4px; }
-                .tab-btn:last-child { border-radius: 0 4px 4px 0; }
-                .tab-btn + .tab-btn { border-left: none; }
-                .tab-btn:hover { color: var(--fg); border-color: var(--fg); }
-                .tab-btn.active { background: var(--fg); color: #000; border-color: var(--fg); font-weight: 700; }
+                .tab-btn:hover { color: var(--fg); }
+                .tab-btn.active { color: var(--primary); font-weight: 700; }
+                .tab-btn.active::after {
+                    content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: var(--primary);
+                }
+
+                /* --- SECONDARY FILTER (Category) --- */
+                .category-filter { margin-top: 15px; margin-bottom: 30px; }
+                .filter-pills { 
+                    display: flex; 
+                    flex-wrap: wrap;
+                    gap: 10px; 
+                    justify-content: center;
+                }
+                .filter-pill {
+                    padding: 6px 16px;
+                    border: 1px solid var(--border-medium);
+                    border-radius: 50px;
+                    background: transparent;
+                    color: var(--fg-muted);
+                    font-family: var(--font-mono);
+                    font-size: 0.7rem;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    text-transform: lowercase;
+                    white-space: nowrap;
+                }
+                .filter-pill:hover {
+                    border-color: var(--primary);
+                    color: var(--fg);
+                }
+                .filter-pill.active {
+                    background: var(--primary);
+                    color: #000;
+                    border-color: var(--primary);
+                    font-weight: 600;
+                    box-shadow: 0 0 12px rgba(255, 0, 60, 0.4);
+                }
 
                 /* --- PROJECTS LIST --- */
-                .projects-section { padding-top: 40px; padding-bottom: 80px; }
+                .projects-section { padding-top: 30px; padding-bottom: 60px; }
                 .project-list { border-top: 1px solid var(--border-medium); }
                 .project-item {
                     display: flex; justify-content: space-between; align-items: center;
-                    padding: 55px 0;
+                    padding: 35px 0;
                     border-bottom: 1px solid var(--border-medium);
                     transition: all 0.3s; cursor: pointer;
                     position: relative;
                 }
                 .project-item:hover {
                     background: var(--bg-alt);
-                    padding-left: 30px; padding-right: 30px;
+                    padding-left: 25px; padding-right: 25px;
                 }
                 .project-item:hover .proj-arrow {
                     opacity: 1; transform: translateX(0);
                 }
 
-                .proj-left { display: flex; align-items: baseline; gap: 40px; }
-                .proj-id { font-family: var(--font-mono); opacity: 0.5; font-size: 1rem; }
-                .proj-name { font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 600; text-transform: none; margin: 0; line-height: 1; letter-spacing: -0.02em; }
+                .proj-left { display: flex; align-items: baseline; gap: 28px; }
+                .proj-id { font-family: var(--font-mono); opacity: 0.5; font-size: 0.8rem; }
+                .proj-name { font-size: clamp(1.6rem, 3vw, 2.5rem); font-weight: 600; text-transform: none; margin: 0; line-height: 1; letter-spacing: -0.02em; }
 
-                .proj-right { text-align: right; font-family: var(--font-mono); font-size: 1rem; opacity: 0.7; }
-                .proj-cat { display: block; margin-bottom: 8px; }
-                .proj-stack { font-size: 0.9rem; opacity: 0.5; }
+                .proj-right { text-align: right; font-family: var(--font-mono); font-size: 0.8rem; opacity: 0.7; }
+                .proj-cat { display: block; margin-bottom: 6px; }
+                .proj-stack { font-size: 0.75rem; opacity: 0.5; }
 
                 .proj-arrow {
                     opacity: 0; transform: translateX(-10px);
@@ -324,7 +389,7 @@ export default function WorkPage() {
                     flex-shrink: 0;
                 }
 
-                .empty-state { padding: 100px 0; text-align: center; font-family: var(--font-mono); opacity: 0.4; letter-spacing: 1px; }
+                .empty-state { padding: 70px 0; text-align: center; font-family: var(--font-mono); opacity: 0.4; letter-spacing: 1px; font-size: 0.85rem; }
 
                 /* ========== MODAL ========== */
                 .modal-overlay {
@@ -471,11 +536,12 @@ export default function WorkPage() {
 
                     /* Tabs */
                     .tabs { flex-wrap: wrap; }
-                    .tab-btn { flex: none; width: 50%; font-size: 0.8rem; padding: 12px 10px; }
-                    .tab-btn:nth-child(1) { border-radius: 4px 0 0 0; }
-                    .tab-btn:nth-child(2) { border-radius: 0 4px 0 0; border-left: none; }
-                    .tab-btn:nth-child(3) { border-radius: 0 0 0 4px; border-top: none; }
-                    .tab-btn:nth-child(4) { border-radius: 0 0 4px 0; border-left: none; border-top: none; }
+                    .tab-btn { flex: none; width: 33.33%; font-size: 0.8rem; padding: 12px 5px; }
+                    
+                    /* Secondary Filter */
+                    .category-filter { margin-top: 20px; margin-bottom: 30px; }
+                    .filter-pills { gap: 8px; }
+                    .filter-pill { padding: 6px 16px; font-size: 0.75rem; }
 
                     /* Projects */
                     .projects-section { padding-top: 30px; padding-bottom: 60px; }

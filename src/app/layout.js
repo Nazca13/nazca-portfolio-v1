@@ -1,5 +1,6 @@
 import './globals.css'
 import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
+import BackgroundEffects from '@/components/ui/BackgroundEffects'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -20,7 +21,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${spaceGrotesk.variable} ${mono.variable}`}>{children}</body>
+      <body className={`${spaceGrotesk.variable} ${mono.variable}`}>
+        <BackgroundEffects />
+        {children}
+      </body>
     </html>
   )
 }
