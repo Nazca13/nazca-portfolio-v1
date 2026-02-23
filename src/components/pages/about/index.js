@@ -107,7 +107,7 @@ export default function AboutPage() {
                         <h1 className="hero-title hero-anim">
                             transforming<br />
                             ideas into<br />
-                            <span className="text-outline">web solution.</span>
+                            <span className="text-outline">solution.</span>
                         </h1>
 
                         <div className="hero-desc hero-anim">
