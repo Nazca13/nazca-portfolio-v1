@@ -72,7 +72,7 @@ export default function Sidebar({ isOpen, onClose }) {
             <style jsx global>{`
                 .sidebar-overlay {
                     position: fixed; inset: 0;
-                    background: rgba(0, 0, 0, 0.6);
+                    background: var(--overlay-bg);
                     backdrop-filter: blur(8px);
                     -webkit-backdrop-filter: blur(8px);
                     z-index: 90;
@@ -86,8 +86,8 @@ export default function Sidebar({ isOpen, onClose }) {
                     position: fixed;
                     top: 0; right: 0;
                     width: 360px; height: 100vh;
-                    background: linear-gradient(180deg, #0d0d0d 0%, #080808 100%);
-                    border-left: 1px solid rgba(255,255,255,0.08);
+                    background: var(--sidebar-bg);
+                    border-left: 1px solid var(--sidebar-border);
                     z-index: 100;
                     display: flex; flex-direction: column;
                     justify-content: space-between;
@@ -103,7 +103,7 @@ export default function Sidebar({ isOpen, onClose }) {
                     position: relative;
                     width: 40px; height: 40px;
                     background: none;
-                    border: 1px solid rgba(255,255,255,0.15);
+                    border: 1px solid var(--sidebar-close-border);
                     border-radius: 50%;
                     cursor: pointer;
                     transition: all 0.3s;
@@ -139,7 +139,7 @@ export default function Sidebar({ isOpen, onClose }) {
                 .sidebar-label {
                     font-family: var(--font-mono);
                     font-size: 0.6rem;
-                    color: rgba(255,255,255,0.3);
+                    color: var(--sidebar-label);
                     letter-spacing: 3px;
                     font-weight: 500;
                 }
@@ -183,7 +183,7 @@ export default function Sidebar({ isOpen, onClose }) {
                 }
 
                 .sidebar-link:hover {
-                    background: rgba(255,255,255,0.04);
+                    background: var(--hover-bg);
                     padding-left: 30px;
                     color: var(--primary) !important;
                 }
@@ -192,11 +192,11 @@ export default function Sidebar({ isOpen, onClose }) {
 
                 .sidebar-link.active {
                     background: var(--fg) !important;
-                    color: #000 !important;
+                    color: var(--bg) !important;
                     padding-left: 30px;
                 }
-                .sidebar-link.active .link-num { opacity: 0.5; color: #000; }
-                .sidebar-link.active .link-arrow { opacity: 1; transform: translateX(0); color: #000; }
+                .sidebar-link.active .link-num { opacity: 0.5; color: var(--bg); }
+                .sidebar-link.active .link-arrow { opacity: 1; transform: translateX(0); color: var(--bg); }
 
                 /* Footer */
                 .sidebar-footer {
@@ -206,13 +206,13 @@ export default function Sidebar({ isOpen, onClose }) {
                 .sidebar-footer-label {
                     font-family: var(--font-mono);
                     font-size: 0.6rem;
-                    color: rgba(255,255,255,0.3);
+                    color: var(--sidebar-label);
                     letter-spacing: 3px;
                     font-weight: 500;
                 }
                 .sidebar-footer-line {
                     height: 1px;
-                    background: rgba(255,255,255,0.08);
+                    background: var(--sidebar-border);
                 }
                 .sidebar-socials {
                     display: flex;

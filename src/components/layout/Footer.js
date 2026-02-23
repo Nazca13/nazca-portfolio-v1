@@ -53,15 +53,15 @@ export default function Footer() {
 
         {/* Left: Form */}
         <div className="footer-left">
-          <h2 className="footer-title">let's work<br /><span className="text-outline">together</span></h2>
+          <h2 className="footer-title">let&apos;s work<br /><span className="text-outline">together</span></h2>
           <form className="cyber-form" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>what's your name?</label>
-              <input type="text" placeholder="John Doe *" value={name} onChange={(e) => setName(e.target.value)} required />
+              <label>what&apos;s your name?</label>
+              <input type="text" placeholder="Your Name *" value={name} onChange={(e) => setName(e.target.value)} required />
             </div>
             <div className="form-group">
-              <label>what's your email?</label>
-              <input type="email" placeholder="john@doe.com *" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <label>what&apos;s your email?</label>
+              <input type="email" placeholder="your@email.com *" value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
             <div className="form-group">
               <label>tell me about your project</label>

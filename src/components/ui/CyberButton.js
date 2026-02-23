@@ -9,7 +9,7 @@ export default function CyberButton({ children, onClick, disabled = false, type 
         .cyber-btn {
           position: relative;
           background: var(--fg);
-          color: #000;
+          color: var(--bg);
           padding: 11px 26px;
           font-family: var(--font-mono);
           font-weight: bold;

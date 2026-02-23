@@ -19,6 +19,25 @@
   --border-medium: #333;
   --border-subtle: rgba(255, 255, 255, 0.1);
 
+  /* Component-specific */
+  --navbar-bg: rgba(5, 5, 5, 0.7);
+  --navbar-border: rgba(255, 255, 255, 0.05);
+  --sidebar-bg: linear-gradient(180deg, #0d0d0d 0%, #080808 100%);
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-label: rgba(255, 255, 255, 0.3);
+  --sidebar-close-border: rgba(255, 255, 255, 0.15);
+  --overlay-bg: rgba(0, 0, 0, 0.6);
+  --modal-bg: #0c0c0c;
+  --modal-overlay: rgba(0, 0, 0, 0.85);
+  --modal-border: rgba(255, 255, 255, 0.08);
+  --modal-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --dot-color: rgba(255, 255, 255, 0.03);
+  --vignette-color: rgba(0, 0, 0, 0.4);
+  --particle-color: rgba(255, 255, 255, 0.3);
+  --hover-bg: rgba(255, 255, 255, 0.04);
+  --crt-bg: #000;
+  --text-stroke: var(--fg);
+
   /* Font Variables (populated by Next.js) */
   --font-main: var(--font-space), sans-serif;
   --font-mono: var(--font-mono), monospace;
@@ -37,13 +56,42 @@
   --transition-slow: 0.5s ease;
 }
 
+/* === LIGHT MODE === */
+[data-theme="light"] {
+  --bg: #f5f5f5;
+  --bg-alt: #e8e8e8;
+  --fg: #1a1a1a;
+  --fg-muted: rgba(26, 26, 26, 0.65);
+
+  --border-light: #ddd;
+  --border-medium: #ccc;
+  --border-subtle: rgba(0, 0, 0, 0.08);
+
+  --navbar-bg: rgba(245, 245, 245, 0.8);
+  --navbar-border: rgba(0, 0, 0, 0.06);
+  --sidebar-bg: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
+  --sidebar-border: rgba(0, 0, 0, 0.08);
+  --sidebar-label: rgba(0, 0, 0, 0.35);
+  --sidebar-close-border: rgba(0, 0, 0, 0.15);
+  --overlay-bg: rgba(0, 0, 0, 0.3);
+  --modal-bg: #ffffff;
+  --modal-overlay: rgba(0, 0, 0, 0.5);
+  --modal-border: rgba(0, 0, 0, 0.1);
+  --modal-shadow: 0 30px 80px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --dot-color: rgba(0, 0, 0, 0.04);
+  --vignette-color: rgba(255, 255, 255, 0.3);
+  --particle-color: rgba(0, 0, 0, 0.15);
+  --hover-bg: rgba(0, 0, 0, 0.03);
+  --crt-bg: #f5f5f5;
+  --text-stroke: var(--fg);
+}
+
 /* === RESET & BASE STYLES === */
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  cursor: none;
-  /* Custom cursor enabled */
+
 }
 
 html {
@@ -51,6 +99,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--bg);
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 body {
@@ -76,7 +125,7 @@ body {
 }
 
 .text-outline {
-  -webkit-text-stroke: 1px var(--fg);
+  -webkit-text-stroke: 1px var(--text-stroke);
   color: transparent;
   transition: all var(--transition-base);
 }

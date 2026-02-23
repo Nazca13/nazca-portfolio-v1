@@ -6,9 +6,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import Link from 'next/link';
 
-import Cursor from '@/components/ui/Cursor';
 import Particles from '@/components/ui/Particles';
 import CRTOverlay from '@/components/ui/CRTOverlay';
+import ThemeToggle from '@/components/ui/ThemeToggle';
 import Sidebar from '@/components/layout/Sidebar';
 import Footer from '@/components/layout/Footer';
 
@@ -72,7 +72,6 @@ export default function ProjectDetailPage({ project }) {
             <div className="cyber-progress" />
             <div className="noise-overlay" />
             <Particles />
-            <div className="hidden-mobile"><Cursor /></div>
             <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
             {/* --- NAVIGATION --- */}
@@ -81,6 +80,7 @@ export default function ProjectDetailPage({ project }) {
                     <Link href="/" className="nav-logo nav-item">nazca<span className="text-primary">.dev</span></Link>
                     <div className="nav-right">
                         <Link href="/work" className="nav-back nav-item">← back</Link>
+                        <ThemeToggle />
                         <button className="hamburger nav-item" onClick={() => setSidebarOpen(true)} aria-label="Menu">
                             <span className="bar"></span>
                             <span className="bar"></span>
@@ -212,11 +212,11 @@ export default function ProjectDetailPage({ project }) {
                 .navbar {
                     position: fixed; top: 0; left: 0; width: 100%;
                     z-index: 40; padding: 25px 0;
-                    background: rgba(5,5,5,0.7);
+                    background: var(--navbar-bg);
                     backdrop-filter: blur(12px);
                     -webkit-backdrop-filter: blur(12px);
-                    border-bottom: 1px solid rgba(255,255,255,0.05);
-                    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                    border-bottom: 1px solid var(--navbar-border);
+                    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s ease;
                 }
                 .navbar.nav-hidden { transform: translateY(-100%); }
                 .nav-container { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.8rem; text-transform: none; }
@@ -324,7 +324,7 @@ export default function ProjectDetailPage({ project }) {
                 .detail-btn {
                     display: inline-flex; align-items: center; gap: 10px;
                     padding: 16px 36px;
-                    color: #000;
+                    color: #fff;
                     border: none; border-radius: 8px;
                     font-family: var(--font-mono);
                     font-size: 0.8rem;
@@ -459,7 +459,7 @@ export default function ProjectDetailPage({ project }) {
 
                     .detail-meta {
                         grid-template-columns: 1fr;
-                        background: rgba(255,255,255,0.03);
+                        background: var(--hover-bg);
                         border-radius: 12px;
                     }
                     .meta-item {

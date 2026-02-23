@@ -40,7 +40,7 @@ export default function BackgroundEffects() {
                     pointer-events: none;
                     background-image: radial-gradient(
                         circle,
-                        rgba(255, 255, 255, 0.03) 1px,
+                        var(--dot-color) 1px,
                         transparent 1px
                     );
                     background-size: 32px 32px;
@@ -166,7 +166,7 @@ export default function BackgroundEffects() {
                     background: radial-gradient(
                         ellipse at center,
                         transparent 50%,
-                        rgba(0, 0, 0, 0.4) 100%
+                        var(--vignette-color) 100%
                     );
                 }
             `}</style>

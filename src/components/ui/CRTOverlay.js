@@ -105,7 +105,7 @@ export default function CRTOverlay({ onComplete }) {
           position: fixed;
           top: 0; left: 0;
           width: 100vw; height: 100vh;
-          background: #000;
+          background: var(--crt-bg);
           z-index: 99998;
           display: flex;
           align-items: center;

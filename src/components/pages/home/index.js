@@ -6,20 +6,20 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import Link from 'next/link';
 
-import Cursor from '@/components/ui/Cursor';
 import Particles from '@/components/ui/Particles';
 import CRTOverlay from '@/components/ui/CRTOverlay';
 
 import CyberButton from '@/components/ui/CyberButton';
+import ThemeToggle from '@/components/ui/ThemeToggle';
 import Sidebar from '@/components/layout/Sidebar';
 import Footer from '@/components/layout/Footer';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const FEATURED_PROJECTS = [
-    { id: "01", name: "FlashPark", cat: "web application", stack: "Next.js / PostgreSQL", color: "#ff003c", image: "/images/works/web/flashpark/page1.png" },
-    { id: "02", name: "Porsche Landing Page", cat: "web design", stack: "Figma", color: "#ff003c", image: "/images/works/design/porsche-landing-page/page1.png" },
-    { id: "03", name: "Aquanime", cat: "web application", stack: "Next.js / Tailwind CSS", color: "#ff003c", image: "/images/works/web/aquanime/page1.png" },
+    { id: "01", name: "FlashPark", cat: "website", stack: "Next.js / PostgreSQL", color: "#ff003c", image: "/images/works/web/flashpark/page1.png" },
+    { id: "02", name: "Porsche Landing Page", cat: "design", stack: "Figma", color: "#ff003c", image: "/images/works/design/porsche-landing-page/page1.png" },
+    { id: "03", name: "Aquanime", cat: "website", stack: "Next.js / Tailwind CSS", color: "#ff003c", image: "/images/works/web/aquanime/page1.png" },
 ];
 
 export default function HomePage() {
@@ -32,9 +32,17 @@ export default function HomePage() {
     const roles = [
         'web developer',
         'ai explorer',
-        'tech enthusiast',
         'creative coder',
-        'digital craftsman'
+        'digital craftsman',
+        'design enthusiast'
+    ];
+
+    const subs = [
+        '& builder',
+        '& learner',
+        '& creator',
+        '& innovator',
+        '& visionary'
     ];
 
     const marqueeTween = useRef(null);
@@ -46,7 +54,7 @@ export default function HomePage() {
             setCurrentRole((prev) => (prev + 1) % roles.length);
         }, 3000);
         return () => clearInterval(interval);
-    }, []);
+    }, [roles.length]);
 
     useEffect(() => {
         const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
@@ -136,7 +144,6 @@ export default function HomePage() {
             <div className="cyber-progress" />
             <div className="noise-overlay" />
             <Particles />
-            <div className="hidden-mobile"><Cursor /></div>
 
             <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
@@ -145,6 +152,7 @@ export default function HomePage() {
                 <div className="container nav-container">
                     <Link href="/" className="nav-logo nav-item">nazca<span className="text-primary">.dev</span></Link>
                     <div className="nav-right">
+                        <ThemeToggle />
                         <button className="hamburger nav-item" onClick={() => setSidebarOpen(true)} aria-label="Menu">
                             <span className="bar"></span>
                             <span className="bar"></span>
@@ -165,19 +173,21 @@ export default function HomePage() {
 
                         <h1 className="hero-title">
                             <div className="mask">
-                                <span className="hero-anim block rotating-text" key={currentRole}>
+                                <span className="hero-anim block rotating-text" key={`role-${currentRole}`}>
                                     {roles[currentRole]}
                                 </span>
                             </div>
                             <div className="mask">
-                                <span className="hero-anim block hero-sub">enthusiast</span>
+                                <span className="hero-anim block hero-sub rotating-text" key={`sub-${currentRole}`}>
+                                    {subs[currentRole]}
+                                </span>
                             </div>
                         </h1>
 
                         <div className="hero-desc hero-anim">
                             <p>
-                                hi i'm nazca — a vocational student majoring in <span className="text-highlight">software engineering</span>.
-                                i don't just write code; i orchestrate systems that are not just functional, but intuitively powerful.
+                                hi i&apos;m nazca — a vocational student majoring in <span className="text-highlight">software engineering</span>.
+                                i don&apos;t just write code; i orchestrate systems that are not just functional, but intuitively powerful.
                             </p>
                         </div>
 
@@ -199,12 +209,13 @@ export default function HomePage() {
                         <div className="marquee-track">
                             {[...Array(6)].map((_, i) => (
                                 <div key={i} className="marquee-item">
-                                    <span className="sep">///</span>
+                                    <span className="sep">{'///'}</span>
                                     <span>javascript</span>
                                     <span className="text-outline">next.js</span>
                                     <span>react</span>
                                     <span className="text-outline">laravel</span>
                                     <span>figma</span>
+                                    <span className="text-outline">canva</span>
                                 </div>
                             ))}
                         </div>
@@ -293,11 +304,11 @@ export default function HomePage() {
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%;
             z-index: 40; padding: 18px 0;
-            background: rgba(5,5,5,0.7);
+            background: var(--navbar-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid var(--navbar-border);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s ease;
         }
         .navbar.nav-hidden {
             transform: translateY(-100%);
@@ -434,7 +445,7 @@ export default function HomePage() {
         .proj-left { display: flex; align-items: baseline; gap: 22px; }
         .proj-id { font-family: var(--font-mono); opacity: 0.5; font-size: 0.75rem; }
         .proj-name { font-size: clamp(1.5rem, 3.5vw, 2.5rem); font-weight: 600; text-transform: none; margin: 0; line-height: 1; letter-spacing: -0.02em; transition: color 0.3s; }
-        .project-item:hover .proj-name { color: #fff; }
+        .project-item:hover .proj-name { color: var(--fg); }
 
         .proj-right { text-align: right; font-family: var(--font-mono); font-size: 0.75rem; opacity: 0.7; }
         .proj-cat { display: block; color: var(--primary); margin-bottom: 5px; }

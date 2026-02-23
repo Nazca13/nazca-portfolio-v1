@@ -8,9 +8,9 @@ import Link from 'next/link';
 
 import { ALL_PROJECTS } from '@/data/projects';
 
-import Cursor from '@/components/ui/Cursor';
 import Particles from '@/components/ui/Particles';
 import CRTOverlay from '@/components/ui/CRTOverlay';
+import ThemeToggle from '@/components/ui/ThemeToggle';
 import Sidebar from '@/components/layout/Sidebar';
 import Footer from '@/components/layout/Footer';
 
@@ -32,7 +32,7 @@ export default function WorkPage() {
             // 1. Filter by Type
             const typeMatch = activeTab === 'all'
                 ? true
-                : project.type === (activeTab === 'work' ? 'freelance' : activeTab);
+                : project.type === activeTab;
 
             // 2. Filter by Category (only if type match & activeTab is not all)
             if (!typeMatch) return false;
@@ -131,7 +131,6 @@ export default function WorkPage() {
             <div className="cyber-progress" />
             <div className="noise-overlay" />
             <Particles />
-            <div className="hidden-mobile"><Cursor /></div>
             <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
             {/* --- STICKY NAVIGATION --- */}
@@ -140,6 +139,7 @@ export default function WorkPage() {
                     <Link href="/" className="nav-logo nav-item">nazca<span className="text-primary">.dev</span></Link>
                     <div className="nav-right">
                         <div className="nav-page-label nav-item">works</div>
+                        <ThemeToggle />
                         <button className="hamburger nav-item" onClick={() => setSidebarOpen(true)} aria-label="Menu">
                             <span className="bar"></span>
                             <span className="bar"></span>
@@ -180,7 +180,7 @@ export default function WorkPage() {
                 {activeTab !== 'all' && (
                     <div className="category-filter container">
                         <div className="filter-pills work-anim">
-                            {['all', 'web application', 'mobile application', 'web design', 'app design', 'web 3'].map((cat) => (
+                            {['all', 'website', 'application', 'design', 'other'].map((cat) => (
                                 <button
                                     key={cat}
                                     onClick={() => setActiveCategory(cat)}
@@ -278,11 +278,11 @@ export default function WorkPage() {
                 .navbar {
                     position: fixed; top: 0; left: 0; width: 100%;
                     z-index: 40; padding: 18px 0;
-                    background: rgba(5,5,5,0.7);
+                    background: var(--navbar-bg);
                     backdrop-filter: blur(12px);
                     -webkit-backdrop-filter: blur(12px);
-                    border-bottom: 1px solid rgba(255,255,255,0.05);
-                    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                    border-bottom: 1px solid var(--navbar-border);
+                    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s ease;
                 }
                 .navbar.nav-hidden { transform: translateY(-100%); }
                 .nav-container { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.7rem; text-transform: none; }
@@ -351,7 +351,7 @@ export default function WorkPage() {
                 }
                 .filter-pill.active {
                     background: var(--primary);
-                    color: #000;
+                    color: #fff;
                     border-color: var(--primary);
                     font-weight: 600;
                     box-shadow: 0 0 12px rgba(255, 0, 60, 0.4);
@@ -394,7 +394,7 @@ export default function WorkPage() {
                 /* ========== MODAL ========== */
                 .modal-overlay {
                     position: fixed; inset: 0; z-index: 100;
-                    background: rgba(0,0,0,0.85);
+                    background: var(--modal-overlay);
                     backdrop-filter: blur(8px);
                     -webkit-backdrop-filter: blur(8px);
                     display: flex; align-items: center; justify-content: center;
@@ -404,23 +404,23 @@ export default function WorkPage() {
 
                 .modal-card {
                     position: relative;
-                    background: #0c0c0c;
-                    border: 1px solid rgba(255,255,255,0.08);
+                    background: var(--modal-bg);
+                    border: 1px solid var(--modal-border);
                     border-radius: 16px;
                     max-width: 560px;
                     width: 100%;
                     overflow: hidden;
                     cursor: default;
-                    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+                    box-shadow: var(--modal-shadow);
                 }
 
                 .modal-close {
                     position: absolute; top: 16px; right: 16px; z-index: 10;
                     width: 36px; height: 36px;
                     border-radius: 50%;
-                    background: rgba(0,0,0,0.6);
+                    background: var(--overlay-bg);
                     backdrop-filter: blur(4px);
-                    border: 1px solid rgba(255,255,255,0.12);
+                    border: 1px solid var(--modal-border);
                     color: var(--fg);
                     display: flex; align-items: center; justify-content: center;
                     cursor: pointer;
@@ -440,7 +440,7 @@ export default function WorkPage() {
                 }
                 .modal-image-overlay {
                     position: absolute; inset: 0;
-                    background: linear-gradient(180deg, transparent 40%, #0c0c0c 100%);
+                    background: linear-gradient(180deg, transparent 40%, var(--modal-bg) 100%);
                 }
                 .modal-cat {
                     position: absolute; bottom: 20px; left: 24px;
@@ -449,7 +449,7 @@ export default function WorkPage() {
                     font-family: var(--font-mono);
                     font-size: 0.7rem;
                     font-weight: 600;
-                    color: #000;
+                    color: #fff;
                     text-transform: none;
                     letter-spacing: 1px;
                     z-index: 2;
@@ -487,8 +487,8 @@ export default function WorkPage() {
                 .modal-stack-row {
                     display: flex; justify-content: space-between; align-items: center;
                     padding: 16px 0;
-                    border-top: 1px solid rgba(255,255,255,0.08);
-                    border-bottom: 1px solid rgba(255,255,255,0.08);
+                    border-top: 1px solid var(--modal-border);
+                    border-bottom: 1px solid var(--modal-border);
                     margin-bottom: 28px;
                     font-family: var(--font-mono);
                     font-size: 0.8rem;
