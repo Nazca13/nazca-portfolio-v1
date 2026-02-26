@@ -80,8 +80,11 @@ export default function WorkPage() {
 
     useGSAP(() => {
         if (loading) return;
-        gsap.from(".project-item", {
-            y: 30, opacity: 0, duration: 0.6, stagger: 0.06, ease: "power3.out"
+        gsap.utils.toArray(".project-item").forEach((el, i) => {
+            gsap.from(el, {
+                y: 30, opacity: 0, duration: 0.6, ease: "power3.out", delay: i * 0.06,
+                scrollTrigger: { trigger: el, start: "top 95%" }
+            });
         });
     }, [activeTab, loading]);
 

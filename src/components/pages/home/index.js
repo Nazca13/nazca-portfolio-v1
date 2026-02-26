@@ -17,9 +17,9 @@ import Footer from '@/components/layout/Footer';
 gsap.registerPlugin(ScrollTrigger);
 
 const FEATURED_PROJECTS = [
-    { id: "01", name: "FlashPark", cat: "website", stack: "Next.js / PostgreSQL", color: "#ff003c", image: "/images/works/web/flashpark/page1.png" },
-    { id: "02", name: "Porsche Landing Page", cat: "design", stack: "Figma", color: "#ff003c", image: "/images/works/design/porsche-landing-page/page1.png" },
-    { id: "03", name: "Aquanime", cat: "website", stack: "Next.js / Tailwind CSS", color: "#ff003c", image: "/images/works/web/aquanime/page1.png" },
+    { id: "01", name: "FlashPark", cat: "website", stack: "Next.js / PostgreSQL", color: "#ff003c", image: "/images/personal/web/flashpark/page1.png" },
+    { id: "02", name: "Porsche Landing Page", cat: "design", stack: "Figma", color: "#ff003c", image: "/images/personal/design/porsche-landing-page/page1.png" },
+    { id: "03", name: "Aquanime", cat: "website", stack: "Next.js / Tailwind CSS", color: "#ff003c", image: "/images/work/web/aquanime/page1.png" },
 ];
 
 export default function HomePage() {
