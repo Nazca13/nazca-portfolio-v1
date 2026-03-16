@@ -78,7 +78,7 @@ export default function Footer() {
           <div className="info-block">
             <h3>contact details</h3>
             <p><a href="mailto:nazca13developer@gmail.com" className="contact-link">nazca13developer@gmail.com</a></p>
-            <p><a href="tel:+6285795980667" className="contact-link">+62 857-9598-0667</a></p>
+            <p><a href="tel:+6285137610502" className="contact-link">+ 62 851-3761-0502</a></p>
           </div>
           <div className="info-block">
             <h3>socials</h3>
